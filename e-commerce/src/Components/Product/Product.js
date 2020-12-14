@@ -1,21 +1,30 @@
 import React from "react";
 import "./Product.css";
+import Image from "./headphones.png";
+import { Link } from "react-router-dom";
 
-const Product = () => {
+const Product = ({ title, image, price, rating }) => {
   return (
     <div className="product">
       <div className="product-info">
-        <p>Hello world</p>
+        <p>{title}</p>
         <p className="product-price">
           <small>$</small>
-          <strong>100</strong>
+          <strong>{price}</strong>
         </p>
         <div className="product-rating">
-          <p>&#11088;</p>
-          <p>&#11088;</p>
-          <p>&#11088;</p>
+          {Array(rating)
+            .fill()
+            .map((_, i) => (
+              <p>&#11088;</p>
+            ))}
         </div>
       </div>
+      {/* fix here to image */}
+      <Link to="checkout">
+        <img src={Image} alt="" />
+      </Link>
+      <button>Add to basket </button>
     </div>
   );
 };

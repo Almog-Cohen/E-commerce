@@ -10,14 +10,21 @@ const Home = () => {
         <img className="home-image" src={Background} alt="" />
 
         <div className="home-row">
+          <Product title="HeadPhones" price={29} rating={4} />
+          <Product />
           <Product />
         </div>
 
         <div className="home-row">
           <Product />
+          <Product />
         </div>
 
-        <div className="home-row">{/* {Product}  */}</div>
+        <div className="home-row">
+          <Product />
+          <Product />
+          <Product />
+        </div>
       </div>
     </div>
   );
