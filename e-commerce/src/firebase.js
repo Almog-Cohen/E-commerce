@@ -1,4 +1,4 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
 const firebaseConfig = {
   apiKey: "AIzaSyAxUH_nSULV1-dhvOsPLt4tj4w9f65GmTI",
   authDomain: "e-commerce-ce132.firebaseapp.com",
