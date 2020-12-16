@@ -30,7 +30,7 @@ const Header = () => {
         <Link to={!user && "/login"}>
           <div onClick={handleAuthentication} className="header-option">
             <span className="header-optionLineOne">
-              {user ? "Hello" : "Hello guest"}
+              Hello {user ? user.email : "Hello guest"}
             </span>
             <span className="header-optionLineTwo">
               {user ? "Sign Out" : "Sign In"}
