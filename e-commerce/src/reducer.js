@@ -7,7 +7,7 @@ export const initialState = {
 export const getBasketTotalPrice = (basket) =>
   basket?.reduce((accu, basketItem) => accu + basketItem.price, 0);
 
-// Add/Delete items by action
+// Add items by action
 const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_TO_BASKET":
@@ -16,6 +16,7 @@ const reducer = (state, action) => {
         basket: [...state.basket, action.item],
       };
 
+    // Remove item by action
     case "REMOVE_FROM_BASKET":
       const index = state.basket.findIndex(
         (basketItem) => basketItem.id === action.id
@@ -32,12 +33,14 @@ const reducer = (state, action) => {
         basket: newBasket,
       };
 
+    // Clear basket list
     case "EMPTY_BASKET":
       return {
         ...state,
         basket: [],
       };
 
+    // Setting user with firebase auth
     case "SET_USER":
       return {
         ...state,

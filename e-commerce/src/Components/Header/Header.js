@@ -37,22 +37,24 @@ const Header = () => {
             </span>
           </div>
         </Link>
-        <div className="header-option">
-          <span className="header-optionLineOne">Returns</span>
-          <span className="header-optionLineTwo">& Orders</span>
-        </div>
-
+        <Link to="/orders">
+          <div className="header-option">
+            <span className="header-optionLineOne">Returns</span>
+            <span className="header-optionLineTwo">& Orders</span>
+          </div>
+        </Link>
         <div className="header-option">
           <span className="header-optionLineOne">Your</span>
           <span className="header-optionLineTwo">Prime</span>
         </div>
-
-        <div className="header-optionBasket">
-          <ShoppingBasket />
-          <span className="header-optionLineTwo header-basketCount">
-            {basket?.length}
-          </span>
-        </div>
+        <Link to="/checkout">
+          <div className="header-optionBasket">
+            <ShoppingBasket />
+            <span className="header-optionLineTwo header-basketCount">
+              {basket?.length}
+            </span>
+          </div>
+        </Link>
       </div>
     </div>
   );

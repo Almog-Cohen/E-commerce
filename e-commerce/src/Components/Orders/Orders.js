@@ -29,7 +29,7 @@ const Orders = () => {
 
   return (
     <div className="orders">
-      <h3>Your List of orders</h3>
+      <h1>Your List of orders</h1>
       <div className="orders-order">
         {orders?.map((order) => (
           <Order order={order} />
