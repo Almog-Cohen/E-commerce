@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useStateValue } from "../../StateProivder";
 import CheckoutProduct from "../Checkout/CheckoutProduct";
 import { Link, useHistory } from "react-router-dom";
+import { db } from "../../firebase";
 
 import "./Payment.css";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
@@ -24,7 +25,7 @@ const Payment = () => {
   const [clientSecret, setClientSecret] = useState(true);
 
   useEffect(() => {
-    // Generate the special stripe secret which allows to charge a customer
+    // Generate the special stripe secret key which allows to charge a customer
     const getClientSecret = async () => {
       const response = await axios({
         method: "post",
@@ -48,9 +49,23 @@ const Payment = () => {
         },
       })
       .then(({ paymentIntent }) => {
+        db.collection("users")
+          .doc(user?.uid)
+          .collection("orders")
+          .doc(paymentIntent.id)
+          .set({
+            basket: basket,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created,
+          });
+
         setSucceeded(true);
         setError(null);
         setProcessing(false);
+
+        dispatch({
+          type: "EMPTY_BASKET",
+        });
         history.replace("/orders");
       });
   };

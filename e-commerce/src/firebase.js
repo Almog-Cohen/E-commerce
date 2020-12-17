@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/firebase-firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyAxUH_nSULV1-dhvOsPLt4tj4w9f65GmTI",
   authDomain: "e-commerce-ce132.firebaseapp.com",
@@ -14,7 +15,7 @@ const firebaseConfig = {
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 // Initalize database
-const db = firebaseApp;
+const db = firebaseApp.firestore();
 
 // Firebase authentiction
 const auth = firebase.auth();
