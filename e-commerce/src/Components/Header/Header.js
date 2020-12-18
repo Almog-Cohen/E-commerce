@@ -1,19 +1,27 @@
 import React from "react";
 import "./Header.css";
-import Logo from "./logo.png";
+import Logo from "./logoe.webp";
 import SearchIcon from "@material-ui/icons/Search";
 import { ShoppingBasket } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useStateValue } from "../../StateProivder";
 import { auth } from "../../firebase";
 
-const Header = () => {
-  const [{ basket, user }, dispatch] = useStateValue();
+const Header = ({ searchfield }) => {
+  const [{ basket, user, searchText }, dispatch] = useStateValue();
+
   const handleAuthentication = () => {
     if (user) {
       // User signout
       auth.signOut();
     }
+  };
+
+  const onSearchChange = (e) => {
+    dispatch({
+      type: "SEARCH_ITEM",
+      searchText: e.target.value,
+    });
   };
 
   return (
@@ -22,8 +30,18 @@ const Header = () => {
         <img className="header-logo" src={Logo} alt="Logo" />
       </Link>
       <div className="header-search">
-        <input className="header-searchInput" type="text" />
-        <SearchIcon className="header-searchIcon" />
+        {searchfield && (
+          <div className="header-search">
+            <input
+              className="header-searchInput"
+              type="text"
+              value={searchText}
+              placeholder="Search for products"
+              onChange={onSearchChange}
+            />
+            <SearchIcon className="header-searchIcon" />
+          </div>
+        )}
       </div>
 
       <div className="header-nav">
@@ -43,10 +61,7 @@ const Header = () => {
             <span className="header-optionLineTwo">& Orders</span>
           </div>
         </Link>
-        <div className="header-option">
-          <span className="header-optionLineOne">Your</span>
-          <span className="header-optionLineTwo">Prime</span>
-        </div>
+
         <Link to="/checkout">
           <div className="header-optionBasket">
             <ShoppingBasket />

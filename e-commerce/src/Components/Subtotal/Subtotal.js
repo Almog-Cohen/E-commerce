@@ -1,14 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Subtotal.css";
 import CurrencyFormat from "react-currency-format";
+import axios from "../axios";
 import { useStateValue } from "../../StateProivder";
 import { getBasketTotalPrice } from "../../reducer";
 import { useHistory } from "react-router-dom";
 const Subtotal = () => {
-  const [{ basket }, dispatch] = useStateValue();
+  const [{ basket, copun }, dispatch] = useStateValue();
+  const [copunText, setCopunText] = useState("");
   // Push programitcally the user into path
   const history = useHistory();
 
+  // const copunStatus = () => {
+  //   return
+  // }
+
+  const checkCopun = (e) => {
+    e.preventDefault();
+    const response = axios({
+      method: "post",
+      // Stripe expects the total currency in subunits
+      url: `/checkCopun?copun=${copunText}`,
+    }).then((response) => {
+      if (response.status === 200) {
+        dispatch({
+          type: "ADD_COPUN",
+          copun: true,
+        });
+      }
+    });
+  };
   return (
     <div className="subtotal">
       <CurrencyFormat
@@ -19,13 +40,24 @@ const Subtotal = () => {
               <strong>{value}</strong>
             </p>
             <small className="subtotal-gift">
-              <input type="checkbox" />
-              This order contains small gift
+              {!copun ? (
+                <div>
+                  <input
+                    type="text"
+                    value={copunText}
+                    placeholder="Please enter copun"
+                    onChange={(e) => setCopunText(e.target.value)}
+                  />
+                  <button onClick={checkCopun}>Check</button>
+                </div>
+              ) : (
+                <p style={{ color: "red" }}>You got 20% discount</p>
+              )}
             </small>
           </>
         )}
         decimalScale={2}
-        value={getBasketTotalPrice(basket)}
+        value={getBasketTotalPrice(basket, copun)}
         displayType={"text"}
         thousandSeparator={true}
         prefix={"$"}

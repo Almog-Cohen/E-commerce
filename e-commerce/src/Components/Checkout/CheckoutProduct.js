@@ -25,8 +25,8 @@ const CheckoutProduct = ({ id, image, title, price, rating, hideBtn }) => {
         <div className="checkoutProduct-infoRating">
           {Array(rating)
             .fill()
-            .map(() => (
-              <p>&#11088;</p>
+            .map((_, i) => (
+              <p key={i}>&#11088;</p>
             ))}
         </div>
         {!hideBtn && (

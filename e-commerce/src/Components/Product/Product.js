@@ -4,14 +4,14 @@ import "./Product.css";
 import { Link } from "react-router-dom";
 import { useStateValue } from "../../StateProivder";
 
-const Product = ({ id, title, image, price, rating }) => {
+const Product = ({ title, image, price, rating }) => {
   const [state, dispatch] = useStateValue();
   //dispatch action
   const addToBasket = () => {
     dispatch({
       type: "ADD_TO_BASKET",
       item: {
-        id: id,
+        id: new Date(),
         title: title,
         image: image,
         price: price,
@@ -31,15 +31,15 @@ const Product = ({ id, title, image, price, rating }) => {
         <div className="product-rating">
           {Array(rating)
             .fill()
-            .map(() => (
-              <p>&#11088;</p>
+            .map((_, i) => (
+              <p key={i}>&#11088;</p>
             ))}
         </div>
       </div>
       {/* fix here to image */}
-      <Link to="checkout">
-        <img src={image} alt="" />
-      </Link>
+
+      <img src={image} alt="" />
+
       <button onClick={addToBasket}>Add to basket </button>
     </div>
   );

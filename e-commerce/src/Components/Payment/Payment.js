@@ -9,9 +9,10 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { getBasketTotalPrice } from "../../reducer";
 import CurrencyFormat from "react-currency-format";
 import axios from "../axios";
+import { red } from "@material-ui/core/colors";
 
 const Payment = () => {
-  const [{ basket, user }, dispatch] = useStateValue();
+  const [{ basket, user, copun }, dispatch] = useStateValue();
 
   const history = useHistory();
 
@@ -30,7 +31,9 @@ const Payment = () => {
       const response = await axios({
         method: "post",
         // Stripe expects the total currency in subunits
-        url: `/payments/create?total=${getBasketTotalPrice(basket) * 100}`,
+        url: `/payments/create?total=${
+          getBasketTotalPrice(basket, copun) * 100
+        }`,
       });
       setClientSecret(response.data.clientSecret);
     };
@@ -80,7 +83,7 @@ const Payment = () => {
     <div className="payment">
       <div className="payment-container">
         <h1>
-          Checkout (<Link to="/checkout"> {basket?.length} items </Link>)
+          Checkout (<Link to="/checkout">{basket?.length} items</Link>)
         </h1>
         <div className="payment-section">
           <div className="payment-title">
@@ -122,10 +125,11 @@ const Payment = () => {
                   renderText={(value) => (
                     <>
                       <h3>Order Total: {value}</h3>
+                      {copun && <p style={{ color: "red" }}>You Saved 20%</p>}
                     </>
                   )}
                   decimalScale={2}
-                  value={getBasketTotalPrice(basket)}
+                  value={getBasketTotalPrice(basket, copun)}
                   displayType={"text"}
                   thousandSeparator={true}
                   prefix={"$"}

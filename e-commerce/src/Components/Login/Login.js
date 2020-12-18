@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
-import Logo from "../Header/logo.png";
+import Logo from "../Header/logoe.webp";
 import { Link, useHistory } from "react-router-dom";
 import { auth } from "../../firebase";
 
@@ -8,6 +8,7 @@ const Login = () => {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [paswword, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const signIn = (e) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ const Login = () => {
       .then((auth) => {
         history.push("/");
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => setError(error.message));
   };
 
   const register = (e) => {
@@ -32,7 +33,7 @@ const Login = () => {
           history.push("/");
         }
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => setError(error.message));
   };
   return (
     <div className="login">
@@ -60,9 +61,11 @@ const Login = () => {
             Sign in
           </button>
         </form>
-
-        <p>Join us and enjoy the best custom service </p>
-
+        {error ? (
+          <p style={{ color: "red" }}>{error}</p>
+        ) : (
+          <p>{"Join us and enjoy the best custom service. "}</p>
+        )}
         <button onClick={register} className="login-createBtn">
           Create Account
         </button>

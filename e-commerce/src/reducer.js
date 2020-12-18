@@ -1,11 +1,22 @@
 export const initialState = {
   basket: [],
   user: null,
+  copun: false,
+  searchText: "",
 };
 
 //Selector
-export const getBasketTotalPrice = (basket) =>
-  basket?.reduce((accu, basketItem) => accu + basketItem.price, 0);
+// export const getBasketTotalPrice = (basket,copun) =>
+//   basket?.reduce((accu, basketItem) => accu + basketItem.price, 0);
+
+export const getBasketTotalPrice = (basket, copun) => {
+  const totalPrice = basket?.reduce(
+    (accu, basketItem) => accu + basketItem.price,
+    0
+  );
+
+  return copun ? totalPrice * 0.8 : totalPrice;
+};
 
 // Add items by action
 const reducer = (state, action) => {
@@ -38,6 +49,18 @@ const reducer = (state, action) => {
       return {
         ...state,
         basket: [],
+      };
+
+    case "ADD_COPUN":
+      return {
+        ...state,
+        copun: action.copun,
+      };
+
+    case "SEARCH_ITEM":
+      return {
+        ...state,
+        searchText: action.searchText,
       };
 
     // Setting user with firebase auth

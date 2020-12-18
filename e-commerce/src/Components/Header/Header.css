@@ -1,8 +1,8 @@
 .header {
-  height: 60px;
+  height: 70px;
   display: flex;
   align-items: center;
-  background-color: #131921;
+  background-color: #b5d5ff;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -10,9 +10,10 @@
 
 .header-logo {
   width: 100px;
+  height: 60px;
   object-fit: contain;
   margin: 0 20px;
-  margin-top: 18px;
+  margin-top: 10px;
 }
 
 .header-search {
@@ -45,6 +46,10 @@
   flex-direction: column;
   margin-left: 10px;
   margin-right: 10px;
+  color: black;
+}
+
+.header-option:hover {
   color: white;
 }
 
@@ -60,6 +65,10 @@
 .header-optionBasket {
   display: flex;
   align-items: center;
+  color: black;
+}
+
+.header-optionBasket:hover {
   color: white;
 }
 

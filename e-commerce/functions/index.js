@@ -7,6 +7,9 @@ const stripe = require("stripe")(
   "sk_test_51Hz2QIJoORMgHmjIHYHvu4n9OcLcPFcn8JCgysuHGyzhF3MmsRVewFcsxNnGYe1lFjVRn6Fiofk65CQodTzLEZHN00BYlPNVZo"
 );
 
+//copun code
+const copunCode = "SALE50";
+
 // API
 
 //APP config
@@ -19,9 +22,19 @@ app.use(cors({ origin: true }));
 //API ROUTES
 app.get("/", (req, res) => res.status(200).send("Hello"));
 
+// Cupon route
+app.post("/checkCopun", (req, res) => {
+  const copun = req.query.copun;
+  console.log("THIS IS WORKING" + copun);
+  if (copun === copunCode) {
+    res.status(200).send("Succuess");
+  } else {
+    res.status(400).send("Copun not match");
+  }
+});
+
 app.post("/payments/create", async (req, res) => {
   const total = req.query.total;
-  console.log("PAyment ", total);
 
   const paymentIntent = await stripe.paymentIntents.create({
     amount: total,

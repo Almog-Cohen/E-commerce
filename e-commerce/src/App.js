@@ -35,36 +35,36 @@ function App() {
         });
       }
     });
-
-    // return () => {
-    //   cleanup;
-    // };
   }, []);
 
   return (
     <Router>
       <div className="app">
-        <Header />
         <Switch>
           <Route path="/login">
+            <Header searchfield={false} />
             <Login />
           </Route>
 
           <Route path="/orders">
+            <Header searchfield={false} />
             <Orders />
           </Route>
 
           <Route path="/checkout">
+            <Header searchfield={false} />
             <Checkout />
           </Route>
 
           <Route path="/payment">
+            <Header searchfield={false} />
             <Elements stripe={promise}>
               <Payment />
             </Elements>
           </Route>
 
           <Route path="/">
+            <Header searchfield={true} />
             <Home />
           </Route>
         </Switch>
