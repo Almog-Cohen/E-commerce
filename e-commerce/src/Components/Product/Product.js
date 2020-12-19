@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./Product.css";
-// import Image from "./headphones.png";
 import { Link } from "react-router-dom";
 import { useStateValue } from "../../StateProivder";
 

@@ -6,7 +6,7 @@ import { useStateValue } from "../../StateProivder";
 import { getBasketTotalPrice } from "../../reducer";
 import { useHistory } from "react-router-dom";
 const Subtotal = () => {
-  const [{ basket, copun }, dispatch] = useStateValue();
+  const [{ basket, copun, user }, dispatch] = useStateValue();
   const [copunText, setCopunText] = useState("");
   // Push programitcally the user into path
   const history = useHistory();
@@ -48,7 +48,9 @@ const Subtotal = () => {
                     placeholder="Please enter copun"
                     onChange={(e) => setCopunText(e.target.value)}
                   />
-                  <button onClick={checkCopun}>Check</button>
+                  <button className="subtotal-gift-btn" onClick={checkCopun}>
+                    Check
+                  </button>
                 </div>
               ) : (
                 <p style={{ color: "red" }}>You got 20% discount</p>
@@ -62,10 +64,15 @@ const Subtotal = () => {
         thousandSeparator={true}
         prefix={"$"}
       />
-
-      <button onClick={(e) => history.push("/payment")}>
-        Procced to checkout
-      </button>
+      {user ? (
+        <div>
+          <button onClick={(e) => history.push("/payment")}>
+            Procced to checkout
+          </button>
+        </div>
+      ) : (
+        <p style={{ color: "red" }}>Please login to procced to checkout</p>
+      )}
     </div>
   );
 };

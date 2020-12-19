@@ -17,7 +17,7 @@ const promise = loadStripe(
 );
 
 function App() {
-  const [{}, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
 
   useEffect(() => {
     // Observer on user sign in state(just logged in / was logged in)
@@ -55,14 +55,14 @@ function App() {
             <Header searchfield={false} />
             <Checkout />
           </Route>
-
-          <Route path="/payment">
-            <Header searchfield={false} />
-            <Elements stripe={promise}>
-              <Payment />
-            </Elements>
-          </Route>
-
+          {user && (
+            <Route path="/payment">
+              <Header searchfield={false} />
+              <Elements stripe={promise}>
+                <Payment />
+              </Elements>
+            </Route>
+          )}
           <Route path="/">
             <Header searchfield={true} />
             <Home />
