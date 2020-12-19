@@ -4,7 +4,6 @@ const express = require("express");
 const cors = require("cors");
 
 const stripe = require("stripe")(
-  "sk_test_51Hz2QIJoORMgHmjIHYHvu4n9OcLcPFcn8JCgysuHGyzhF3MmsRVewFcsxNnGYe1lFjVRn6Fiofk65CQodTzLEZHN00BYlPNVZo"
 );
 
 //copun code
