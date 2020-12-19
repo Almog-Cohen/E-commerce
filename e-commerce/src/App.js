@@ -7,7 +7,7 @@ import Payment from "./Components/Payment/Payment";
 import Orders from "./Components/Orders/Orders";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useEffect } from "react";
-import { auth } from "./firebase";
+import { auth, analythics } from "./firebase";
 import { useStateValue } from "./StateProivder";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
@@ -36,6 +36,12 @@ function App() {
       }
     });
   }, []);
+
+  console.log(
+    "TRYING ANALYTICS IN LOG",
+    analythics.logEvent("trying analaitcs", user)
+  );
+  analythics.logEvent("trying analaitcs", user);
 
   return (
     <Router>

@@ -36,6 +36,12 @@
   background-color: #cd9042;
 }
 
+/* @media screen and (max-width: 400px) {
+  .header-logo {
+    display: none;
+  }
+} */
+
 .header-nav {
   display: flex;
   justify-content: space-evenly;

@@ -11,10 +11,6 @@ const Subtotal = () => {
   // Push programitcally the user into path
   const history = useHistory();
 
-  // const copunStatus = () => {
-  //   return
-  // }
-
   const checkCopun = (e) => {
     e.preventDefault();
     const response = axios({
